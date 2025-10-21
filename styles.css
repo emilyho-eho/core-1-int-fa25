@@ -119,7 +119,7 @@ a.btn:hover {
 /* Container for image buttons */
 .home-container {
   display: grid;
-  grid-template-columns: repeat(5, 1fr); /* 👈 5 columns per row */
+  grid-template-columns: repeat(5, 1fr); /* 5 columns per row */
   gap: 20px; /* space between buttons */
   justify-content: center; /* centers the grid horizontally */
   max-width: 1200px;
