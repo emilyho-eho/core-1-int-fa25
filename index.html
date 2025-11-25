@@ -2,28 +2,102 @@
  <html>
    <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-     <title>My Skincare Cabinet</title>
+      <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Karla:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
    </head>
-   <body>
-     <h1>My Skincare Cabinet</h1>
-     <p>A curated selection of effective, budget-friendly skincare products from my current routine, ideal for troubled skin.</p>
-     <p>By Emily Ho</p>
-     <p>10 . 2025</p>
-     
-<div class="home-container">
-  <a href="entries/entry-1.html"><img src="images/TEST(1Zero).webp" alt="Page 1" class="image-btn"></a>
-  <a href="entries/entry-2.html"><img src="images/TEST(2Iunik).jpg" alt="Page 2" class="image-btn"></a>
-  <a href="entries/entry-3.html"><img src="images/TEST(3Paulas).jpg" alt="Page 3" class="image-btn"></a>
-  <a href="entries/entry-4.html"><img src="image4.jpg" alt="Page 4" class="image-btn"></a>
-  <a href="entries/entry-5.html"><img src="image5.jpg" alt="Page 5" class="image-btn"></a>
-  <a href="entries/entry-6.html"><img src="image6.jpg" alt="Page 6" class="image-btn"></a>
-  <a href="entries/entry-7.html"><img src="image7.jpg" alt="Page 7" class="image-btn"></a>
-  <a href="entries/entry-8.html"><img src="images/TEST(8Illiyoon).jpg" alt="Page 8" class="image-btn"></a>
-  <a href="entries/entry-9.html"><img src="image9.jpg" alt="Page 9" class="image-btn"></a>
-  <a href="entries/entry-10.html"><img src="image10.jpg" alt="Page 10" class="image-btn"></a>
-</div>
+   
+<body class="bg">
 
-   </body>
- </html>
+  <div class="artboard">
+
+<div class="artboard">
+  <div class="hero-container">
+    <h1>My Skincare Cabinet</h1>
+    <p>A curated selection of effective, budget-friendly skincare products from my current routine, ideal for troubled skin.</p>
+  </div>
+
+   <!-- Left vertical text -->
+    <div class="vertical-left">BY EMILY HO</div>
+    <!-- Right vertical text -->
+    <div class="vertical-right">FALL 2025</div>
+
+  <div class="scatter-container">
+
+        <a class="item purito" href="entries/entry-9.html">
+          <img src="images/HOME(9Purito).png" class="image-btn">
+        </a>
+
+        <a class="item round" href="entries/entry-10.html">
+          <img src="images/HOME(10Round).png" class="image-btn">
+        </a>
+
+        <a class="item innis" href="entries/entry-7.html">
+          <img src="images/HOME(7Innis).png" class="image-btn">
+        </a>
+
+        <a class="item zero" href="entries/entry-1.html">
+          <img src="images/HOME(1Zero).png" class="image-btn">
+        </a>
+
+        <a class="item illiyoon" href="entries/entry-8.html">
+          <img src="images/HOME(8Illiyoon).png" class="image-btn">
+        </a>
+
+        <a class="item iunik" href="entries/entry-2.html">
+          <img src="images/HOME(2Iunik).png" class="image-btn">
+        </a>
+
+        <a class="item haru" href="entries/entry-5.html">
+          <img src="images/HOME(5Haru).png" class="image-btn">
+        </a>
+
+        <a class="item ordinary" href="entries/entry-4.html">
+          <img src="images/HOME(4Ordinary).png" class="image-btn">
+        </a>
+
+        <a class="item pair" href="entries/entry-6.html">
+          <img src="images/HOME(6Pair).png" class="image-btn">
+        </a>
+
+        <a class="item paula" href="entries/entry-3.html">
+          <img src="images/HOME(3Paula).png" class="image-btn">
+        </a>
+
+      </div>
+    </div>
+
+    <script>
+      const items = document.querySelectorAll('.item');
+
+      document.addEventListener('mousemove', (e) => {
+        items.forEach(item => {
+          const rect = item.getBoundingClientRect();
+          const centerX = rect.left + rect.width / 2;
+          const centerY = rect.top + rect.height / 2;
+
+          const rotateX = (e.clientY - centerY) / 15;
+          const rotateY = (centerX - e.clientX) / 15;
+
+          const baseRot = getComputedStyle(item).getPropertyValue('--base-rot') || "0deg";
+          const scale = item.matches(':hover') ? 1.25 : 1;
+
+          item.style.transform = `
+            rotate(${baseRot})
+            rotateX(${rotateX}deg)
+            rotateY(${rotateY}deg)
+            scale(${scale})
+          `;
+        });
+      });
+
+      document.addEventListener('mouseleave', () => {
+        items.forEach(item => {
+          const baseRot = getComputedStyle(item).getPropertyValue('--base-rot') || "0deg";
+          item.style.transform = `rotate(${baseRot}) scale(1)`;
+        });
+      });
+    </script>
+
+  </body>
+</html>
