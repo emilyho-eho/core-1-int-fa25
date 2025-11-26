@@ -109,8 +109,25 @@ a.btn:hover {
 /* #endregion */
 
 /* #region ===HOME-PAGE: BUTTONS=== */
+/* Wrap everything scrollable horizontally */
+.scroll-wrap {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: auto;   /* horizontal scroll both directions */
+  overflow-y: hidden;
+  position: relative;
+}
 
-/* ----------------- Item Defaults ----------------- */
+.artboard {
+  width: 1440px;           /* original artboard width */
+  height: 1024px;          /* original artboard height */
+  position: relative;
+  margin: 0 auto;
+
+  /* scale proportionally to viewport width */
+  transform-origin: top center;
+  transform: scale(calc(100vw / 1440));
+}
 /* All items positioned inside canvas */
 .scatter-container {
   position: absolute;
@@ -136,7 +153,7 @@ a.btn:hover {
 .purito {
   left: -19px;
   top: -30px;
-  --base-rot: -27deg;
+  --base-rot: 27deg;
   transform: rotate(var(--base-rot));
 }
 
@@ -144,7 +161,7 @@ a.btn:hover {
 .round {
   left: 311px;
   top: -61px;
-  --base-rot: 10deg;
+  --base-rot: -10deg;
   transform: rotate(var(--base-rot));
 }
 
@@ -152,14 +169,14 @@ a.btn:hover {
 .innis {
   left: 720px;
   top: -37px;
-  --base-rot: -10deg;
+  --base-rot: 10deg;
   transform: rotate(var(--base-rot));
 }
 
 /* Zero */
 .zero {
   left: 1047px;
-  top: -13px;
+  top: 13px;
   --base-rot: 50deg;
   transform: rotate(var(--base-rot));
 }
@@ -168,7 +185,7 @@ a.btn:hover {
 .illiyoon {
   left: 1148px;
   top: 331px;
-  --base-rot: 16deg;
+  --base-rot: -16deg;
   transform: rotate(var(--base-rot));
 }
 
@@ -176,7 +193,7 @@ a.btn:hover {
 .iunik {
   left: 997px;
   top: 608px;
-  --base-rot: -16deg;
+  --base-rot: 16deg;
   transform: rotate(var(--base-rot));
 }
 
@@ -184,7 +201,7 @@ a.btn:hover {
 .haru {
   left: 775px;
   top: 625px;
-  --base-rot: -6deg;
+  --base-rot: 6deg;
   transform: rotate(var(--base-rot));
 }
 
@@ -192,7 +209,7 @@ a.btn:hover {
 .ordinary {
   left: 535px;
   top: 650px;
-  --base-rot: 11deg;
+  --base-rot: -11deg;
   transform: rotate(var(--base-rot));
 }
 
@@ -200,7 +217,7 @@ a.btn:hover {
 .pair {
   left: 224px;
   top: 657px;
-  --base-rot: -8deg;
+  --base-rot: 8deg;
   transform: rotate(var(--base-rot));
 }
 
@@ -208,7 +225,7 @@ a.btn:hover {
 .paula {
   left: 23px;
   top: 442px;
-  --base-rot: 7deg;
+  --base-rot: -7deg;
   transform: rotate(var(--base-rot));
 }
 /* #endregion */
@@ -222,68 +239,58 @@ a.btn:hover {
   width: 100%;
   min-height: 100vh;            /* ensures it covers the viewport height */
 }
-
-/* LEFT VERTICAL TEXT */
-.vertical-left {
-  position: absolute;
-  top: 50%;                  /* vertical center */
-  left: 0;                    /* align left */
-  transform: translateY(-50%); /* center vertically */
-  writing-mode: vertical-rl;  /* rotate text 90deg clockwise */
-  text-orientation: mixed;
-  font-family: 'Karla', sans-serif;
-  font-weight: 500;
-  font-size: 1rem;
+/* FRONT-LAYER GRID: scale responsively */
+.header-grid {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 1440px;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  align-items: center;      /* vertical centering for grid cells */
+  justify-items: center;    /* horizontal centering for all columns */
+  height: 100vh;            /* full viewport height */
+  z-index: 10;
+  pointer-events: none;
 }
-/* RIGHT VERTICAL TEXT */
-.vertical-right {
-  position: absolute;
-  top: 50%;
-  right: 0;                    /* align right */
-  transform: translateY(-50%); /* center vertically */
+
+/* Left Column */
+.left-label,
+.right-label {
+  display: flex;            /* flex for centering rotated text */
+  align-items: center;      /* vertical centering */
+  justify-content: center;  /* horizontal centering */
   writing-mode: vertical-rl;
-  text-orientation: mixed;
   font-family: 'Karla', sans-serif;
-  font-weight: 500;
-  font-size: 1rem;
+  font-size: clamp(0.8rem, 1.5vw, 1rem);
 }
 
-/* Scaled artboard container */
-.artboard {
-  width: 1440px;          /* Your original artboard width */
-  height: 1024px;         /* Your original artboard height */
-  transform: scale(0.85); /* Shrink the entire layout */
-  transform-origin: center center; 
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  translate: -50% -50%;   /* perfect center */
+/* Left only rotate 180deg */
+.left-label {
+  transform: rotate(180deg);
+  text-shadow:
+    0 0 5px #fff,
+    0 0 15px #fff,
+    0 0 15px #fff;
 }
 
-/* Center the hero-container inside the artboard */
-.hero-container {
-  position: absolute;          /* relative to artboard */
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); /* center horizontally & vertically */
-  
-  width: 70%;                  /* bounding box width */
-  max-width: 700px;            /* limit max width */
+/* Right Column */
+.right-label {
+  transform: rotate(0deg); /* no rotation needed */
+  text-shadow:
+    0 0 5px #fff,
+    0 0 15px #fff,
+    0 0 15px #fff;
+}
+
+/* Center Column stays the same */
+.center-hero {
   text-align: center;
-  padding: 20px;               /* optional padding inside box */
-  background: rgba(255,255,255,0.0); /* transparent if you want, or add a color */
-  box-sizing: border-box;
-}
-/* Fonts */
-.hero-container h1 {
-  font-family: 'Italiana', serif; /* title font */
-  font-size: 3rem;                /* adjust size */
-  margin-bottom: 20px;
-}
-
-.hero-container p {
-  font-family: 'Karla', sans-serif; /* body font */
-  font-size: 1.2rem;
-  line-height: 1.5;
+  text-shadow:
+    0 0 5px #fff,
+    0 0 10px #fff,
+    0 0 15px #fff;
 }
 /* #endregion */

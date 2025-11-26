@@ -1,28 +1,35 @@
- <!DOCTYPE html>
- <html>
-   <head>
+<!DOCTYPE html>
+<html>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-      <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Karla:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
-   </head>
-   
+    <link href="styles.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Karla:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+  </head>
+
 <body class="bg">
 
-  <div class="artboard">
+  <!-- SCROLL WRAPPER -->
+  <div class="scroll-wrap">
 
-<div class="artboard">
-  <div class="hero-container">
-    <h1>My Skincare Cabinet</h1>
-    <p>A curated selection of effective, budget-friendly skincare products from my current routine, ideal for troubled skin.</p>
-  </div>
+    <!-- SINGLE ARTBOARD -->
+    <div class="artboard">
 
-   <!-- Left vertical text -->
-    <div class="vertical-left">BY EMILY HO</div>
-    <!-- Right vertical text -->
-    <div class="vertical-right">FALL 2025</div>
+      <!-- FRONT-LAYER 3 COLUMN GRID -->
+      <div class="header-grid">
+        <div class="left-label">BY EMILY HO</div>
 
-  <div class="scatter-container">
+        <div class="center-hero">
+          <h1>My Skincare Cabinet</h1>
+          <p>A curated selection of effective, budget-friendly skincare products from my current routine, ideal for troubled skin.</p>
+        </div>
+
+        <div class="right-label">FALL 2025</div>
+      </div>
+
+      <!-- SCATTERED ICONS (unchanged) -->
+      <div class="scatter-container">
 
         <a class="item purito" href="entries/entry-9.html">
           <img src="images/HOME(9Purito).png" class="image-btn">
@@ -66,38 +73,40 @@
 
       </div>
     </div>
+  </div>
 
-    <script>
-      const items = document.querySelectorAll('.item');
+  <!-- TILT BEHAVIOR -->
+  <script>
+    const items = document.querySelectorAll('.item');
 
-      document.addEventListener('mousemove', (e) => {
-        items.forEach(item => {
-          const rect = item.getBoundingClientRect();
-          const centerX = rect.left + rect.width / 2;
-          const centerY = rect.top + rect.height / 2;
+    document.addEventListener('mousemove', (e) => {
+      items.forEach(item => {
+        const rect = item.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
 
-          const rotateX = (e.clientY - centerY) / 15;
-          const rotateY = (centerX - e.clientX) / 15;
+        const rotateX = (e.clientY - centerY) / 15;
+        const rotateY = (centerX - e.clientX) / 15;
 
-          const baseRot = getComputedStyle(item).getPropertyValue('--base-rot') || "0deg";
-          const scale = item.matches(':hover') ? 1.25 : 1;
+        const baseRot = getComputedStyle(item).getPropertyValue('--base-rot') || "0deg";
+        const scale = item.matches(':hover') ? 1.25 : 1;
 
-          item.style.transform = `
-            rotate(${baseRot})
-            rotateX(${rotateX}deg)
-            rotateY(${rotateY}deg)
-            scale(${scale})
-          `;
-        });
+        item.style.transform = `
+          rotate(${baseRot})
+          rotateX(${rotateX}deg)
+          rotateY(${rotateY}deg)
+          scale(${scale})
+        `;
       });
+    });
 
-      document.addEventListener('mouseleave', () => {
-        items.forEach(item => {
-          const baseRot = getComputedStyle(item).getPropertyValue('--base-rot') || "0deg";
-          item.style.transform = `rotate(${baseRot}) scale(1)`;
-        });
+    document.addEventListener('mouseleave', () => {
+      items.forEach(item => {
+        const baseRot = getComputedStyle(item).getPropertyValue('--base-rot') || "0deg";
+        item.style.transform = `rotate(${baseRot}) scale(1)`;
       });
-    </script>
+    });
+  </script>
 
-  </body>
+</body>
 </html>
