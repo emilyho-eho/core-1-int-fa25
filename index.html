@@ -28,85 +28,105 @@
         <div class="right-label">FALL 2025</div>
       </div>
 
-      <!-- SCATTERED ICONS (unchanged) -->
-      <div class="scatter-container">
+      <div class="scatter-scale-wrap">
 
-        <a class="item purito" href="entries/entry-9.html">
-          <img src="images/HOME(9Purito).png" class="image-btn">
-        </a>
+        <!-- SCATTERED ICONS (unchanged) -->
+        <div class="scatter-container">
 
-        <a class="item round" href="entries/entry-10.html">
-          <img src="images/HOME(10Round).png" class="image-btn">
-        </a>
+          <a class="item purito" href="entries/entry-9.html">
+            <img src="images/HOME(9Purito).png" class="image-btn">
+          </a>
 
-        <a class="item innis" href="entries/entry-7.html">
-          <img src="images/HOME(7Innis).png" class="image-btn">
-        </a>
+          <a class="item round" href="entries/entry-10.html">
+            <img src="images/HOME(10Round).png" class="image-btn">
+          </a>
 
-        <a class="item zero" href="entries/entry-1.html">
-          <img src="images/HOME(1Zero).png" class="image-btn">
-        </a>
+          <a class="item innis" href="entries/entry-7.html">
+            <img src="images/HOME(7Innis).png" class="image-btn">
+          </a>
 
-        <a class="item illiyoon" href="entries/entry-8.html">
-          <img src="images/HOME(8Illiyoon).png" class="image-btn">
-        </a>
+          <a class="item zero" href="entries/entry-1.html" data-tooltip="For: dry skin&#10;Price: $$">
+            <img src="images/HOME(1Zero).png" class="image-btn">
+          </a>
 
-        <a class="item iunik" href="entries/entry-2.html">
-          <img src="images/HOME(2Iunik).png" class="image-btn">
-        </a>
+          <a class="item illiyoon" href="entries/entry-8.html">
+            <img src="images/HOME(8Illiyoon).png" class="image-btn">
+          </a>
 
-        <a class="item haru" href="entries/entry-5.html">
-          <img src="images/HOME(5Haru).png" class="image-btn">
-        </a>
+          <a class="item iunik" href="entries/entry-2.html">
+            <img src="images/HOME(2Iunik).png" class="image-btn">
+          </a>
 
-        <a class="item ordinary" href="entries/entry-4.html">
-          <img src="images/HOME(4Ordinary).png" class="image-btn">
-        </a>
+          <a class="item haru" href="entries/entry-5.html">
+            <img src="images/HOME(5Haru).png" class="image-btn">
+          </a>
 
-        <a class="item pair" href="entries/entry-6.html">
-          <img src="images/HOME(6Pair).png" class="image-btn">
-        </a>
+          <a class="item ordinary" href="entries/entry-4.html">
+            <img src="images/HOME(4Ordinary).png" class="image-btn">
+          </a>
 
-        <a class="item paula" href="entries/entry-3.html">
-          <img src="images/HOME(3Paula).png" class="image-btn">
-        </a>
+          <a class="item pair" href="entries/entry-6.html">
+            <img src="images/HOME(6Pair).png" class="image-btn">
+          </a>
 
-      </div>
-    </div>
-  </div>
+          <a class="item paula" href="entries/entry-3.html">
+            <img src="images/HOME(3Paula).png" class="image-btn">
+          </a>
 
-  <!-- TILT BEHAVIOR -->
-  <script>
-    const items = document.querySelectorAll('.item');
+        </div>
+      </div> <!-- END scatter-scale-wrap -->
 
-    document.addEventListener('mousemove', (e) => {
-      items.forEach(item => {
-        const rect = item.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
+    </div> <!-- END artboard -->
+  </div> <!-- END scroll-wrap -->
 
-        const rotateX = (e.clientY - centerY) / 15;
-        const rotateY = (centerX - e.clientX) / 15;
+<div class="tooltip"></div>
 
-        const baseRot = getComputedStyle(item).getPropertyValue('--base-rot') || "0deg";
-        const scale = item.matches(':hover') ? 1.25 : 1;
+<script>
+const items = document.querySelectorAll('.item');
+const tooltip = document.querySelector('.tooltip');
 
-        item.style.transform = `
-          rotate(${baseRot})
-          rotateX(${rotateX}deg)
-          rotateY(${rotateY}deg)
-          scale(${scale})
-        `;
-      });
-    });
+document.addEventListener('mousemove', (e) => {
+  items.forEach(item => {
+    // ---------------- Tilt
+    const rect = item.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
 
-    document.addEventListener('mouseleave', () => {
-      items.forEach(item => {
-        const baseRot = getComputedStyle(item).getPropertyValue('--base-rot') || "0deg";
-        item.style.transform = `rotate(${baseRot}) scale(1)`;
-      });
-    });
-  </script>
+    const rotateX = (e.clientY - centerY) / 15;
+    const rotateY = (centerX - e.clientX) / 15;
+
+    const baseRot = getComputedStyle(item).getPropertyValue('--base-rot') || "0deg";
+    const scale = item.matches(':hover') ? 1.25 : 1;
+
+    item.style.transform = `
+      rotate(${baseRot})
+      rotateX(${rotateX}deg)
+      rotateY(${rotateY}deg)
+      scale(${scale})
+    `;
+
+    // ---------------- Tooltip
+    if (item.matches(':hover')) {
+      const text = item.getAttribute('data-tooltip');
+      if (text) {
+        tooltip.textContent = text;
+        tooltip.style.display = 'block';
+        tooltip.style.left = e.clientX + 15 + 'px';
+        tooltip.style.top = e.clientY + 15 + 'px';
+      }
+    }
+  });
+});
+
+// Reset tilt and hide tooltip when leaving any item
+items.forEach(item => {
+  item.addEventListener('mouseleave', () => {
+    const baseRot = getComputedStyle(item).getPropertyValue('--base-rot') || "0deg";
+    item.style.transform = `rotate(${baseRot}) scale(1)`;
+    tooltip.style.display = 'none';
+  });
+});
+</script>
 
 </body>
 </html>

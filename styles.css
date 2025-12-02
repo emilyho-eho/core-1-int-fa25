@@ -1,50 +1,29 @@
 
-:root {
-      --color-primary: #D2691E;
-      --color-secondary: #8B4513;
-      --color-accent: #DAA520;
-      --color-tertiary: #A0522D;
-      --color-highlight: #CD853F;
-
-
-      --gray-50: #F9FAFB;
-      --gray-100: #F3F4F6;
-      --gray-200: #E5E7EB;
-      --gray-300: #D1D5DB;
-      --gray-400: #9CA3AF;
-      --gray-500: #6B7280;
-      --gray-600: #4B5563;
-      --gray-700: #374151;
-      --gray-800: #1F2937;
-      --gray-900: #111827;
-
-
-      --font-heading: "Bitcount Grid Single Ink", sans-serif;
-      --font-body: "Bitcount Grid Single Ink", serif;
-
-      --breakpoint-sm: 640px;
-      --breakpoint-md: 768px;
-      --breakpoint-lg: 1024px;
-    }
 
 /* #region ===GLOBAL TEXT=== */
-body {
-  font-family: 'Karla', sans-serif;  /* default body font */
-  margin: 0;
-  padding: 0;
+p {
+  font-family: 'Karla', sans-serif;
+  font-size: 1rem;       
+  line-height: 1.5;      
+  margin-bottom: 1.5em;    /* space between paragraphs */
 }
-
 h1 {
-  font-family: 'Italiana', serif;   /* only titles */
-  font-size: 4rem;                   /* adjust as needed */
+  font-family: 'Italiana', serif;
+  font-size: 4rem;
   font-weight: 400;
   text-align: center;
+}
+h2 {
+  font-family: 'Karla', sans-serif;
+  font-size: 2rem;
+  font-weight: 400;
+  text-align: left;
 }
 
     /* Thick horizontal line */
 .thick-line {
   border: none;           
-  height: 4px;            /* thickness */
+  height: 2.5px;            /* thickness */
   background-color: #333; 
   margin: 20px 0;
 }
@@ -57,14 +36,39 @@ h1 {
 }
 /* #endregion */
 
-/* #region ===ENTRIES: CONTAINER & LAYOUT=== */
-.page-content {
-  max-width: 1000px;   /* same as grid container */
-  margin: 0 auto;       /* centers content */
-  padding: 20px;        /* space from edges */
+/* #region ===ENTRIES: HEADER=== */
+.nav-header {
+  position: relative;           /* scrolls with page */
+  width: 100%;
+  display: flex;
+  justify-content: center;      /* center horizontally */
+  align-items: center;
+  padding: 15px 0;              /* vertical padding */
+  border-radius: 10px;          /* optional rounded edges */
+  margin-bottom: 20px;          /* space from content below */
 }
 
-.container {
+/* Style the link inside the header */
+.nav-header a {
+  font-family: 'Italiana', serif;
+  font-weight: 600;
+  font-size: 1.2rem;
+  text-decoration: none;
+  color: #333;
+  padding: 8px 15px;
+  border-radius: 8px;
+  transition: background 0.3s, color 0.3s;
+}
+
+.nav-header a:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: #000;
+}
+/* #endregion */
+
+/* #region ===ENTRIES: GRID/LAYOUT=== */
+/* -----------------TOP CONTAINER----------------- */
+.container.top {
   display: grid;                   /* grid container */
   grid-template-columns: 1fr 1fr;  /* 2 equal columns */
   gap: 20px;                       /* space between columns */
@@ -73,78 +77,210 @@ h1 {
   padding: 20px;
 }
 
-.column {
+/* -----------------COLUMN 1----------------- */
+.top-column-left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Center image inside column 1 */
+.top-column-left img {
+  max-width: 100%;   /* ← scales down to fit column */
+  height: auto;      /* keeps aspect ratio */
+  display: block;
+  margin: 0 auto;    /* center horizontally */
+}
+
+/* -----------------COLUMN 2----------------- */
+.top-column-right {
+  flex: 1;                   /* takes up space equally or adjust */
   background-color: #f4f4f4;
   padding: 20px;
   border-radius: 10px;
+
+  box-shadow:
+    inset 0 2px 8px rgba(0,0,0,0.05),
+    0 4px 15px rgba(0,0,0,0.1);
+
+  background-image: linear-gradient(
+    145deg, 
+    rgba(255,255,255,0.7) 0%, 
+    rgba(255,255,255,0.5) 100%
+  );
+
+  border: 1px solid rgba(255,255,255,0.5);
+  
+  color: #333;
+  text-shadow: 0 1px 1px rgba(255,255,255,0.5);
 }
 
-/* Make images scale inside their column */
-.column img {
-  width: 100%;     
-  height: auto;    /* maintains aspect ratio */
-  display: block;  /* removes bottom spacing */
+/* -----------------PERSONAL REVIEW----------------- */
+.journal-entry {
+  background: #fff;
+  padding: 30px;
+  max-width: 800px;
+  margin: 40px auto;
+  border-radius: 10px;
+  position: relative;
+}
+
+/* Only paragraphs with this class get the effect */
+.journal-line {
+  position: relative;
+  line-height: 2.5;
+  margin-bottom: 25px;
+}
+
+.underline-line {
+  position: absolute;
+  height: 0;
+  border-bottom: 2px dotted #999;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+}
+/* -----------------BOTTOM CONTAINER----------------- */
+.container.bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;   /* same 2-column layout */
+  gap: 20px;
+  max-width: 1000px;
+  margin: 40px auto;               /* add spacing above it */
+  padding: 20px;
+}
+
+/* -----------------COLUMN 1----------------- */
+.bottom-column-left {
+  background-color: #f4f4f4;       /* same glass effect bg */
+  padding: 20px;
+  border-radius: 10px;
+
+  box-shadow:
+    inset 0 2px 8px rgba(0,0,0,0.05),
+    0 4px 15px rgba(0,0,0,0.1);
+
+  background-image: linear-gradient(
+    145deg,
+    rgba(255,255,255,0.7) 0%,
+    rgba(255,255,255,0.5) 100%
+  );
+
+  border: 1px solid rgba(255,255,255,0.5);
+  color: #333;
+  text-shadow: 0 1px 1px rgba(255,255,255,0.5);
+}
+
+/* -----------------COLUMN 2----------------- */
+.bottom-column-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.bottom-column-right img {
+  max-width: 100%;   /* ← scales down to fit column */
+  height: auto;      /* keeps aspect ratio */
+  display: block;
+  margin: 0 auto;    /* center horizontally */
 }
 /* #endregion */
-/* #region ===ENTRIES: PURCHASE LINK BUTTON=== */
-a.btn {
+
+/* #region ===ENTRIES: BUTTONS=== */
+.purchase-btn {
   display: block;          /* full-width within column */
   width: 100%;             
   text-align: center;      
   padding: 15px 0;         /* vertical padding inside button */
-  background-color: #007BFF;
+  background-color: #333;
   color: white;
   text-decoration: none;
-  border-radius: 5px;
   font-weight: bold;
   font-family: 'Karla', sans-serif;
   transition: background 0.3s;
-
   margin: 20px 0;          /* space above & below button */
 }
-a.btn:hover {
-  background-color: #0056b3;
+
+.purchase-btn:hover {
+  background-color: #333;
   cursor: pointer;
 }
 /* #endregion */
 
 /* #region ===HOME-PAGE: BUTTONS=== */
+.tooltip {
+  position: fixed;
+  pointer-events: none;          /* so it doesn’t block hover */
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.9), rgba(255,255,255,0.6));
+  border: 1px solid #ccc;
+  font-family: 'Karla', sans-serif;
+  font-size: 0.9rem;
+  white-space: pre-line;         /* allows line breaks */
+  color: #333;
+  display: none;
+  z-index: 1000;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
 /* Wrap everything scrollable horizontally */
 .scroll-wrap {
   width: 100%;
   min-height: 100vh;
-  overflow-x: auto;   /* horizontal scroll both directions */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: auto;
   overflow-y: hidden;
-  position: relative;
 }
 
+/* NEW: scale wrapper that gives correct scroll width */
+.scatter-scale-wrap {
+  position: relative;
+  width: calc(1440px * var(--scale-value));
+  height: calc(1024px * var(--scale-value));
+  overflow: visible;
+}
+
+/* SCALE VALUE */
+:root {
+  --scale-value: calc(100vw / 1600);
+}
+
+/* Single fixed artboard */
 .artboard {
-  width: 1440px;           /* original artboard width */
-  height: 1024px;          /* original artboard height */
+  width: 1440px;  
+  height: 1024px;
   position: relative;
   margin: 0 auto;
-
-  /* scale proportionally to viewport width */
-  transform-origin: top center;
-  transform: scale(calc(100vw / 1440));
 }
-/* All items positioned inside canvas */
+
+/* Scattered items container (scaled but REAL width handled above) */
 .scatter-container {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  top: 0;
+  left: 0;
+  width: 1440px;
+  height: 1024px;
+  transform-origin: top left;
+  transform: scale(var(--scale-value));
 }
+
 .item {
   position: absolute;
   cursor: pointer;
   transform-style: preserve-3d;
   transition: transform 0.15s ease;
 }
+
 .image-btn {
   width: auto;
   height: auto;
   display: block;
-  pointer-events: none; /* keeps hover behavior clean */
+  pointer-events: none;
 }
 
 /* ----------------- Entry Item Positioning ----------------- */
@@ -228,18 +364,22 @@ a.btn:hover {
   --base-rot: -7deg;
   transform: rotate(var(--base-rot));
 }
+
 /* #endregion */
-/* #region ===HOME-PAGE: GENERAL === */
+
+/* #region ===HOME-PAGE: GRID/LAYOUT=== */
+
 .bg {
   background-image: url("images/HOME\(Background\).jpg");
-  background-size: cover;       /* makes the image scale to fill the screen */
-  background-position: center;  /* keeps image centered */
-  background-repeat: no-repeat; /* prevents tiling */
-  background-attachment: fixed; /* optional: gives a parallax feel */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   width: 100%;
-  min-height: 100vh;            /* ensures it covers the viewport height */
+  min-height: 100vh;
 }
-/* FRONT-LAYER GRID: scale responsively */
+
+/* FRONT-LAYER GRID */
 .header-grid {
   position: fixed;
   top: 0;
@@ -249,25 +389,24 @@ a.btn:hover {
   max-width: 1440px;
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
-  align-items: center;      /* vertical centering for grid cells */
-  justify-items: center;    /* horizontal centering for all columns */
-  height: 100vh;            /* full viewport height */
+  align-items: center;
+  justify-items: center;
+  height: 100vh;
   z-index: 10;
   pointer-events: none;
 }
 
-/* Left Column */
 .left-label,
 .right-label {
-  display: flex;            /* flex for centering rotated text */
-  align-items: center;      /* vertical centering */
-  justify-content: center;  /* horizontal centering */
+  display: flex;
+  align-items: center;
+  justify-content: center;
   writing-mode: vertical-rl;
   font-family: 'Karla', sans-serif;
   font-size: clamp(0.8rem, 1.5vw, 1rem);
 }
 
-/* Left only rotate 180deg */
+/* Left rotated */
 .left-label {
   transform: rotate(180deg);
   text-shadow:
@@ -276,16 +415,16 @@ a.btn:hover {
     0 0 15px #fff;
 }
 
-/* Right Column */
+/* Right */
 .right-label {
-  transform: rotate(0deg); /* no rotation needed */
+  transform: rotate(0deg);
   text-shadow:
     0 0 5px #fff,
     0 0 15px #fff,
     0 0 15px #fff;
 }
 
-/* Center Column stays the same */
+/* Center */
 .center-hero {
   text-align: center;
   text-shadow:
@@ -293,4 +432,5 @@ a.btn:hover {
     0 0 10px #fff,
     0 0 15px #fff;
 }
+
 /* #endregion */

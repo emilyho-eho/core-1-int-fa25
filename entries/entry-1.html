@@ -7,39 +7,88 @@
 
      <!-- Google Fonts link -->
   <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Karla:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
      <!-- LINK TO YOUR CSS FILE GOES HERE -->
   <link rel="stylesheet" href="../styles.css">
 </head>
 
 <body>
+  <div class="nav-header">
+  <a href="../index.html">My Skin Care Cabinet</a>
+</div>
 
-    <div class="container">
-  <div class="column">
-    <!-- Left column content here -->
-    <img src="../images/TEST(1Zero).webp"
+    <div class="container top">
+  <div class="top-column-left">
+    <p></p>
+    <img src="../images/HOME(1Zero).png"
     <p></p>
   </div>
 
-  <div class="column">
+  <div class="top-column-right">
     <!-- Right column content here -->
-    <h2>Clean it Zero Cleansing Balm Nourishing</h2>
-    <p>Hello: brief product description here lalala yap yap</p>
-     <hr class="thick-line">
+    <h2>Clean it Zero, Nourishing Cleansing Balm</h2>
+    <p>The Nourishing Cleansing Balm dissolves waterproof makeup & impurities while deeply hydrating and repairing dry skin types. Vegan balm-to-oil cleansing balm formula instantly melts to cleanse build up and makeup.</p>
+    <hr class="thick-line">
     <p>Suited to</p>
     <hr class="thin-line">
     <p>Addressed Concern</p>
     <hr class="thin-line">
     <p>Key Ingredients</p>
-
-    <a href="https://example.com" class="btn">Seller Name Here $30</a>
-    <a href="https://example.com" class="btn">Seller Name Here $20</a>
+    
+    <a href="https://example.com" class="purchase-btn">Seller Name Here $30</a>
+    <a href="https://example.com" class="purchase-btn">Seller Name Here $20</a>
   </div>
 </div>
 
-<div class="page-content">
-<h2>My Personal Review & Experience</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<div class="journal-entry">
+  <h2>✎ My Personal Review</h2>
+  <p class="journal-line">This is my first line. Yip yap yap yappity yap. This my review gang. Yip yap yap yappity yap. Yip yap yap yappity yap. Yip yap yap yappity yap.</p>
+
+<div class="container bottom">
+  <!-- LEFT: TEXT -->
+  <div class="bottom-column-left">
+    <h2>How to Use:</h2>
+    <p>Hello hello hello Yip yap yap yappity yap. Yip yap yap yappity yap.</p>
+  </div>
+
+  <!-- RIGHT: IMAGE -->
+  <div class="bottom-column-right">
+    <img src="../images/ENTRY(ZeroSwatch).webp">
+  </div>
 </div>
 
 </body>
 </html>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".journal-line").forEach(p => {
+    // clear previous lines
+    p.querySelectorAll(".underline-line").forEach(l => l.remove());
+
+    const range = document.createRange();
+    const textNode = p.firstChild;
+    if (!textNode) return;
+
+    // loop over every character and track each physical line
+    for (let i = 0; i < textNode.length; i++) {
+      range.setStart(textNode, i);
+      range.setEnd(textNode, i + 1);
+
+      const rect = range.getBoundingClientRect();
+      const containerRect = p.getBoundingClientRect();
+
+      const top = rect.top - containerRect.top;
+
+      // Skip duplicates
+      if (!p.lastTop || Math.abs(top - p.lastTop) > 5) {
+        const line = document.createElement("div");
+        line.className = "underline-line";
+        line.style.top = top + rect.height + "px";
+        p.appendChild(line);
+        p.lastTop = top;
+      }
+    }
+  });
+});
+</script>
