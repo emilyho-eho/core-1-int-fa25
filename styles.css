@@ -250,7 +250,6 @@ h2 {
   --scale-value: calc(100vw / 1600);
 }
 
-/* Single fixed artboard */
 .artboard {
   width: 1440px;  
   height: 1024px;
@@ -258,7 +257,6 @@ h2 {
   margin: 0 auto;
 }
 
-/* Scattered items container (scaled but REAL width handled above) */
 .scatter-container {
   position: absolute;
   top: 0;

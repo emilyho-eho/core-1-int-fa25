@@ -4,8 +4,91 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+     <!-- Google Fonts link -->
+  <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Karla:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../styles.css">
 </head>
+
 <body>
-   <p>this is entry 10</p> 
+  <div class="nav-header">
+  <a href="../index.html">My Skin Care Cabinet</a>
+</div>
+
+    <div class="container top">
+  <div class="top-column-left">
+    <p></p>
+    <img src="../images/HOME(10Round).png"
+    <p></p>
+  </div>
+
+  <div class="top-column-right">
+    <!-- Right column content here -->
+    <h2>Round Lab Birch Moisturizing Sunscreen UVLock SPF 45+ Broad Spectrum</h2>
+    <p>Multi-award-winning and Korea's bestselling sunscreen for years.This moisturizing sunscreen offers powerful SPF 45+ broad-spectrum protection from harmful UVA and UVB rays—while delivering the comfort of a daily moisturizer.</p>
+    <hr class="thick-line">
+    <p>Suited to</p>
+    <hr class="thin-line">
+    <p>Addressed Concern</p>
+    <hr class="thin-line">
+    <p>Key Ingredients</p>
+    
+    <a href="https://example.com" class="purchase-btn">Seller Name Here $30</a>
+    <a href="https://example.com" class="purchase-btn">Seller Name Here $20</a>
+  </div>
+</div>
+
+<div class="journal-entry">
+  <h2>✎ My Personal Review</h2>
+  <p class="journal-line">This is my first line. Yip yap yap yappity yap. This my review gang. Yip yap yap yappity yap. Yip yap yap yappity yap. Yip yap yap yappity yap.</p>
+
+<div class="container bottom">
+  <!-- LEFT: TEXT -->
+  <div class="bottom-column-left">
+    <h2>How to Use:</h2>
+    <p>Heeeeheeeeee</p>
+  </div>
+
+  <!-- RIGHT: IMAGE -->
+  <div class="bottom-column-right">
+    <img src="../images/ENTRY(RoundSwatch).webp">
+  </div>
+</div>
+
 </body>
 </html>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".journal-line").forEach(p => {
+    // clear previous lines
+    p.querySelectorAll(".underline-line").forEach(l => l.remove());
+
+    const range = document.createRange();
+    const textNode = p.firstChild;
+    if (!textNode) return;
+
+    // loop over every character and track each physical line
+    for (let i = 0; i < textNode.length; i++) {
+      range.setStart(textNode, i);
+      range.setEnd(textNode, i + 1);
+
+      const rect = range.getBoundingClientRect();
+      const containerRect = p.getBoundingClientRect();
+
+      const top = rect.top - containerRect.top;
+
+      // Skip duplicates
+      if (!p.lastTop || Math.abs(top - p.lastTop) > 5) {
+        const line = document.createElement("div");
+        line.className = "underline-line";
+        line.style.top = top + rect.height + "px";
+        p.appendChild(line);
+        p.lastTop = top;
+      }
+    }
+  });
+});
+</script>
